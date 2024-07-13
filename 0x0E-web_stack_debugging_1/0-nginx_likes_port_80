@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# This Bash script configures Nginx to listen on port 80 and restart the service
+
 # Open the port 80
 sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 systemctl restart nginx
+
+# Check if Nginx is listening on port 80 and returning a web page with HTTP 200
+if curl -I http://localhost | grep "HTTP/1.1 200 OK"; then
+    echo "2"
+else
+    echo "0"
+fi
